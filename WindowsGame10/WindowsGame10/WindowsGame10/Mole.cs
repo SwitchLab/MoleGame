@@ -17,7 +17,7 @@ namespace WindowsGame10
         Texture2D mole_left;
 
         public int posX=0;
-        public int posY=0;
+        public int posY=6;
         public bool movingDown = false;
         public bool movingUp = false;
         public bool movingRight = false;
@@ -42,7 +42,7 @@ namespace WindowsGame10
            spriteBatch.End();
        }
        
-        public Rectangle rec = new Rectangle(30,180,50,70);
+        public Rectangle rec = new Rectangle(30,780,50,70);
         public void MoveDown()
         {
             rec.Y += 4;
