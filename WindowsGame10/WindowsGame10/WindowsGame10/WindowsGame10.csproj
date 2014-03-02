@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Levels.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Mole.cs" />
     <Compile Include="UpdateCases.cs" />

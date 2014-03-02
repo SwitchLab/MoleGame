@@ -30,7 +30,6 @@ namespace WindowsGame10
        // Rectangle[] rectNow;
         static Random r = new Random();
 
-
         public Wall(int width, int height, Vector2 pos, State[] st)
         {
             wallPosition = pos;
