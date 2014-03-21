@@ -20,12 +20,22 @@ namespace WindowsGame10
             for (int i = 0; i < bm.array.GetLength(1); i++)
                 for (int j = 0; j < bm.array.GetLength(2); j++) 
                 {
-                    walls.Add(new Wall(20, 110, new Vector2(100 *i+90, 100 * j-5+160),
+                    walls.Add(new Wall(20, 110, new Vector2(100 *i+490, 100 * j-5+80),
                         SetStates(new bool[] { bm.array[0, j, i].rightWall, bm.array[1, j, i].rightWall, bm.array[2, j, i].rightWall })));
 
-                    walls.Add(new Wall(110, 20, new Vector2(100 * i-5, 100 * j+90+160),
+                    walls.Add(new Wall(110, 20, new Vector2(100 * i-5+400, 100 * j+90+80),
                         SetStates(new bool[] { bm.array[0, j, i].belowWall, bm.array[1, j, i].belowWall, bm.array[2, j, i].belowWall })));
                 }
+            for (int i = 0; i < bm.array.GetLength(1); i++)
+            {
+                walls.Add(new Wall(20, 110, new Vector2(-100 + 490, 100 * i - 5 + 80),
+                        SetStates(new bool[] { true, true, true })));
+            }
+            for (int i = 0; i < bm.array.GetLength(2)-1; i++)
+            {
+                walls.Add(new Wall(110, 20, new Vector2(100 * i - 5 + 400, -100 + 90 + 80),
+                        SetStates(new bool[] { true, true, true })));
+            }
             this.walls = walls.ToArray();
         }
 
@@ -89,8 +99,13 @@ namespace WindowsGame10
             return s;
         }
 
+        public void Reset()
+        {
+            this.stateIndexNow = 0;
+        }
+
         public int stateIndexNow;
-        Wall[] walls;
+        public Wall[] walls;
         Texture2D circle;
 
         public void Load(Texture2D circle)
@@ -98,10 +113,15 @@ namespace WindowsGame10
             this.circle = circle;
         }
 
-        bool updateflag = false;
+      //  bool updateflag = false;
         public void Update()
         {
             stateIndexNow = (stateIndexNow + 1) % 3;
+           /* for (int i = 0; i < walls.Length; i++)
+            {
+                walls[i].ReState(stateIndexNow, stateIndexNow == 0 ? 2 : stateIndexNow - 1);
+            }*/
+
             /*if (Keyboard.GetState().IsKeyDown(Keys.A) && !updateflag)
             {
                 stateIndexNow = (stateIndexNow + 1) % 3;
@@ -113,6 +133,9 @@ namespace WindowsGame10
             }*/
         }
 
+        Color brownColor = new Color(84, 50, 26);
+        public Color lightBrownColor = new Color(155, 102, 63);
+
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
@@ -122,8 +145,8 @@ namespace WindowsGame10
                     foreach (Rectangle r in w.baseBelowRectangles)
                         spriteBatch.Draw(circle, r, Color.Black);
                 else if (w.states[stateIndexNow] == State.Come)
-                    foreach (Rectangle r in w.baseAboveRectangles)
-                        spriteBatch.Draw(circle, new Rectangle(r.X, r.Y, 2, 2), Color.SandyBrown);
+                    foreach (Rectangle r in w.baseBelowRectangles)
+                        spriteBatch.Draw(circle, new Rectangle(r.X, r.Y, 2, 2), lightBrownColor);
 
             /*           for (int i = 0; i < spritePositions.Length; i++)
                       {
@@ -140,10 +163,10 @@ namespace WindowsGame10
             foreach (Wall w in walls)
                 if (w.states[stateIndexNow] == State.NotChange)
                     foreach (Rectangle r in w.baseAboveRectangles)
-                        spriteBatch.Draw(circle, r, Color.Brown);
+                        spriteBatch.Draw(circle, r, brownColor);
                 else if (w.states[stateIndexNow] == State.Change)
                     foreach (Rectangle r in w.baseAboveRectangles)
-                        spriteBatch.Draw(circle, r, Color.SandyBrown);
+                        spriteBatch.Draw(circle, r, lightBrownColor);
                // else if (w.states[stateIndexNow] == State.Come)
                 //    foreach (Rectangle r in w.baseAboveRectangles)
                 //        spriteBatch.Draw(circle, new Rectangle(r.X, r.Y, 2, 2), Color.SandyBrown);

@@ -29,7 +29,7 @@ namespace WindowsGame10
             if (mole.movingDown)
             {
                 mole.MoveDown();
-                if (mole.rec.Y % 100 == 80)
+                if (mole.rec.Y % 100 == 92)
                 {
                     mole.movingDown = false;
                     mole.moving = false;
@@ -56,7 +56,7 @@ namespace WindowsGame10
             if (mole.movingUp)
             {
                 mole.MoveUp();
-                if (mole.rec.Y % 100 == 80)
+                if (mole.rec.Y % 100 == 92)
                 {
                     mole.movingUp = false;
                     mole.moving = false;
@@ -84,7 +84,7 @@ namespace WindowsGame10
             if (mole.movingRight)
             {
                 mole.MoveRight();
-                if (mole.rec.X % 100 == 30)
+                if (mole.rec.X % 100 == 20)
                 {
                     mole.movingRight = false;
                     mole.moving = false;
@@ -112,7 +112,7 @@ namespace WindowsGame10
             if (mole.movingLeft)
             {
                 mole.MoveLeft();
-                if (mole.rec.X % 100 == 30)
+                if (mole.rec.X % 100 == 20)
                 {
                     mole.movingLeft = false;
                     mole.moving = false;
